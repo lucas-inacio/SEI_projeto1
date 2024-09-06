@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sistemas Embarcados Projeto 1</title>
+        <link rel="stylesheet" href="/css/default.css">
+    </head>
+    <body>
+        <header>
+            Sistemas Embarcados: Halan & Lucas
+        </header>
+        <main>
+            <section>
+                <figure>
+                    <img src="/imagens/sol.png">
+                </figure>
+                <span>23°C</span>
+            </section>
+            <section>
+                <figure>
+                    <img src="/imagens/umidade.png">
+                </figure>
+                <span>63%</span>
+            </section>
+            <section>
+                <button class="led">
+                    <img src="/imagens/botao.png">
+                </button>
+                <button class="led">
+                    <img src="/imagens/botao.png">
+                </button>                
+            </section>
+        </main>
+        <footer>
+            <span>Direitos Reservados a Halan & Lucas, 2024</span>
+            <a href="/config.html">Configurar</a>
+        </footer>
+        <script>
+            let onButton = document.getElementById("onButton");
+            let offButton = document.getElementById("offButton");
+            let tempField = document.getElementById("temp");
+            let humiFiled = document.getElementById("umid");
+
+            // str deve ser on ou off  
+            async function setLED(str) {
+                try {
+                    await fetch('/'+str);
+                } catch(e) {
+                    console.log(e.message);
+                }
+            }
+
+            async function getTemp() {
+                try {
+                    let res = await fetch('/temp');
+                    let text = await res.text();
+                    tempField.innerText = text;
+                    setTimeout(getTemp, 5000);
+                } catch(e) {
+                    console.log(e.message);
+                }
+            }
+
+            async function getHumi() {
+                try {
+                    let res = await fetch('/umid');
+                    let text = await res.text();
+                    humiFiled.innerText = text;
+                    setTimeout(getHumi, 5000);
+                } catch(e) {
+                    console.log(e.message);
+                }
+            }
+
+            onButton.addEventListener('click', (e)=>{
+                e.preventDefault();
+                setLED('on');
+            });
+            
+            offButton.addEventListener('click', (e)=>{
+                e.preventDefault();
+                setLED('off');
+            });
+
+            getTemp();
+            getHumi();
+        </script>
+    </body>
+</html>
