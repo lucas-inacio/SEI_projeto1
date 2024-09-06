@@ -18,7 +18,6 @@ arduino-cli lib install "DHT Sensor Library"
 arduino-cli config set library.enable_unsafe_install true
 arduino-cli lib install --git-url https://github.com/me-no-dev/AsyncTCP.git
 arduino-cli lib install --git-url https://github.com/me-no-dev/ESPAsyncWebServer.git
-arduino-cli lib install --git-url https://github.com/mobizt/Firebase-ESP8266.git
 ```
 
 ## Compilando o projeto
