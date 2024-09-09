@@ -8,8 +8,6 @@
 #include "sensor.hpp"
 #include "webserver.hpp"
 
-// #include "osapi.h"
-
 #define BOTAO 5
 
 bool aplicarConfig = false;
@@ -67,8 +65,6 @@ void setup() {
 
     configuraSensores();      
     setupWebserver();
-    // os_timer_setfn(&timer, timer_func, nullptr);
-    // os_timer_arm(&timer, samplingPeriodMs, true);
 }
 
 void loop() {
