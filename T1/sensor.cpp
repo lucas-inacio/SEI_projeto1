@@ -1,6 +1,7 @@
 #include "sensor.hpp"
 
 #include <Arduino.h>
+#include <math.h>
 
 #include <Adafruit_Sensor.h>
 #include <DHT.h>
@@ -22,7 +23,7 @@ float le_temperatura() {
     sensors_event_t evento;
     dht.temperature().getEvent(&evento);
     if(isnan(evento.temperature)) {
-        Serial.println("Erro ao ler temperatura!");
+        return INFINITY;
     } else {
         return evento.temperature;
     }
@@ -33,7 +34,7 @@ float le_umidade() {
     sensors_event_t evento;
     dht.humidity().getEvent(&evento);
     if(isnan(evento.relative_humidity)) {
-        Serial.println("Erro ao ler umidade!");
+        return INFINITY;
     } else {
         return evento.relative_humidity;
     }
