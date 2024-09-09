@@ -15,19 +15,19 @@
                 <figure>
                     <img src="/imagens/sol.png">
                 </figure>
-                <span>23°C</span>
+                <span id="temp">23°C</span>
             </section>
             <section>
                 <figure>
                     <img src="/imagens/umidade.png">
                 </figure>
-                <span>63%</span>
+                <span id="umid">63%</span>
             </section>
             <section>
-                <button class="led">
+                <button id="led1" class="led">
                     <img src="/imagens/botao.png">
                 </button>
-                <button class="led">
+                <button id="led2" class="led">
                     <img src="/imagens/botao.png">
                 </button>                
             </section>
@@ -37,13 +37,14 @@
             <a href="/config.html">Configurar</a>
         </footer>
         <script>
-            let onButton = document.getElementById("onButton");
-            let offButton = document.getElementById("offButton");
-            let tempField = document.getElementById("temp");
-            let humiFiled = document.getElementById("umid");
+            let temp = document.getElementById("temp");
+            let umid = document.getElementById("umid");
+            let led1 = document.getElementById("led1");
+            let led2 = document.getElementById("led2");
 
-            // str deve ser on ou off  
-            async function setLED(str) {
+
+            // str deve ser led1 ou led2  
+            async function mudaLED(str) {
                 try {
                     await fetch('/'+str);
                 } catch(e) {
@@ -55,7 +56,7 @@
                 try {
                     let res = await fetch('/temp');
                     let text = await res.text();
-                    tempField.innerText = text;
+                    temp.innerText = text + "°C";
                     setTimeout(getTemp, 5000);
                 } catch(e) {
                     console.log(e.message);
@@ -66,21 +67,21 @@
                 try {
                     let res = await fetch('/umid');
                     let text = await res.text();
-                    humiFiled.innerText = text;
+                    umid.innerText = text + "%";
                     setTimeout(getHumi, 5000);
                 } catch(e) {
                     console.log(e.message);
                 }
             }
 
-            onButton.addEventListener('click', (e)=>{
+            led1.addEventListener('click', (e)=>{
                 e.preventDefault();
-                setLED('on');
+                mudaLED('led1');
             });
             
-            offButton.addEventListener('click', (e)=>{
+            led2.addEventListener('click', (e)=>{
                 e.preventDefault();
-                setLED('off');
+                mudaLED('led2');
             });
 
             getTemp();
