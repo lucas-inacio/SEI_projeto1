@@ -67,9 +67,19 @@ void setup() {
     setupWebserver();
 }
 
+unsigned long tempo = 0;
+volatile float umidade = 0.0f;
+volatile float temperatura = 0.0f; 
 void loop() {
     if(aplicarConfig) {
         Serial.println("Reconfigurando...");
         aplicaConfig();
+    }
+
+    unsigned long agora = millis();
+    if(agora - tempo >= 1000) {
+        tempo = agora;
+        umidade = le_umidade();
+        temperatura = le_temperatura();
     }
 }

@@ -5,6 +5,6 @@ void configuraSensores();
 
 float le_temperatura();
 
-float le_umidade(float temperatura);
+float le_umidade();
 
 #endif // SENSOR_HPP
