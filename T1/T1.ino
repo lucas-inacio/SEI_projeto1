@@ -12,7 +12,7 @@
 
 #define BOTAO 5
 
-bool aplicarConfig;
+bool aplicarConfig = false;
 
 /***********************************************
  * Funções de configuração para chamar em setup
