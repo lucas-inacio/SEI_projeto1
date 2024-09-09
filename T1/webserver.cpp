@@ -4,6 +4,7 @@
 
 #include "common.hpp"
 #include "config.hpp"
+#include "sensor.hpp"
 
 #include "site_data.h"
 
@@ -107,6 +108,32 @@ void setupWebserver() {
             request->send(response);
         } else {
             request->send(404, "text/plain", "Not found");
+        }
+    });
+
+    server.on("/umid", HTTP_GET, [](AsyncWebServerRequest *request) {
+        float umidade = le_umidade();
+        if(umidade != INFINITY) {
+            request->send(200, "text/plain", String(umidade));
+        } else {
+            request->send(500, "text/plain", "Internal error");
+        }
+    });
+
+    server.on("/temp", HTTP_GET, [](AsyncWebServerRequest *request) {
+        float temp = le_temperatura();
+        if(temp != INFINITY) {
+            request->send(200, "text/plain", String(temp));
+        } else {
+            request->send(500, "text/plain", "Internal error");
+        }
+    });
+    server.on("/umidade", HTTP_GET, [](AsyncWebServerRequest *request) {
+        float umidade = le_umidade();
+        if(umidade != INFINITY) {
+            request->send(200, "text/plain", String(umidade));
+        } else {
+            request->send(500, "text/plain", "Internal error");
         }
     });
 
