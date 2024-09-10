@@ -13,7 +13,9 @@
         <main>
             <section>
                 <figure>
-                    <img src="/imagens/sol.png">
+                    <img id="medio" src="/imagens/sol.png">
+                    <img id="quente" src="/imagens/fogo.png">
+                    <img id="frio" src="/imagens/frio.png">
                 </figure>
                 <span id="temp">23°C</span>
             </section>
@@ -41,7 +43,30 @@
             let umid = document.getElementById("umid");
             let led1 = document.getElementById("led1");
             let led2 = document.getElementById("led2");
+            let medio = document.getElementById("medio");
+            let quente = document.getElementById("quente");
+            let frio = document.getElementById("frio");
 
+            quente.style.display = "none";
+            frio.style.display = "none";
+
+            function figuraTemp(temperatura) {
+                if(!isNaN(temperatura)) {
+                    if(temperatura > 30) {
+                        quente.style.display = "block";
+                        medio.style.display = "none";
+                        frio.style.display = "none";
+                    } else if (temperatura <= 30 && temperatura >= 20) {
+                        quente.style.display = "none";
+                        medio.style.display = "block";
+                        frio.style.display = "none";
+                    } else {
+                        quente.style.display = "none";
+                        medio.style.display = "none";
+                        frio.style.display = "block";
+                    }
+                }
+            }
 
             // str deve ser led1 ou led2  
             async function mudaLED(str) {
@@ -59,6 +84,9 @@
                     if(res.status === 200) {
                         let text = await res.text();
                         temp.innerText = text + "°C";
+
+                        let valor = Number(text);
+                        figuraTemp(valor);
                     } else {
                         console.log(res.status);
                     }
