@@ -6,7 +6,7 @@
 
 // Indica se alterações devem ser aplicadas e o dispositivo reiniciado
 #ifndef IMPLEMENTATION
-extern bool aplicarConfig;
+extern volatile bool aplicarConfig;
 extern volatile float umidade;
 extern volatile float temperatura; 
 #endif

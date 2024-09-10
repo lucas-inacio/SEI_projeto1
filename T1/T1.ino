@@ -13,7 +13,7 @@
 #define IMPLEMENTATION
 #include "common.hpp"
 
-bool aplicarConfig = false;
+volatile bool aplicarConfig = false;
 
 /***********************************************
  * Funções de configuração para chamar em setup
