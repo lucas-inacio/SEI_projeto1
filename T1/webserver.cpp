@@ -114,7 +114,6 @@ void setupWebserver() {
     });
 
     server.on("/umid", HTTP_GET, [](AsyncWebServerRequest *request) {
-        float umidade = le_umidade();
         if(umidade != INFINITY) {
             request->send(200, "text/plain", String(umidade));
         } else {
@@ -123,16 +122,14 @@ void setupWebserver() {
     });
 
     server.on("/temp", HTTP_GET, [](AsyncWebServerRequest *request) {
-        float temp = le_temperatura();
-        if(temp != INFINITY) {
-            request->send(200, "text/plain", String((int)round(temp)));
+        if(temperatura != INFINITY) {
+            request->send(200, "text/plain", String((int)round(temperatura)));
         } else {
             request->send(500, "text/plain", "Internal error");
         }
     });
 
     server.on("/umidade", HTTP_GET, [](AsyncWebServerRequest *request) {
-        float umidade = le_umidade();
         if(umidade != INFINITY) {
             request->send(200, "text/plain", String((int)round(umidade)));
         } else {
