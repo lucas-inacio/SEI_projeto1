@@ -128,6 +128,7 @@ void setupWebserver() {
             request->send(500, "text/plain", "Internal error");
         }
     });
+
     server.on("/umidade", HTTP_GET, [](AsyncWebServerRequest *request) {
         float umidade = le_umidade();
         if(umidade != INFINITY) {
@@ -135,6 +136,16 @@ void setupWebserver() {
         } else {
             request->send(500, "text/plain", "Internal error");
         }
+    });
+
+    server.on("/led1", HTTP_POST, [](AsyncWebServerRequest *request) {
+        request->send(200, "text/plain", "OK");
+        digitalWrite(LED1, !digitalRead(LED1));
+    });
+
+    server.on("/led2", HTTP_POST, [](AsyncWebServerRequest *request) {
+        request->send(200, "text/plain", "OK");
+        digitalWrite(LED2, !digitalRead(LED2));
     });
 
     server.onNotFound([](AsyncWebServerRequest *request) {
