@@ -11,6 +11,8 @@
 #include <FS.h>
 #include <SPIFFS.h>
 
+#include <math.h>
+
 AsyncWebServer server(80);
 
 /*
@@ -123,7 +125,7 @@ void setupWebserver() {
     server.on("/temp", HTTP_GET, [](AsyncWebServerRequest *request) {
         float temp = le_temperatura();
         if(temp != INFINITY) {
-            request->send(200, "text/plain", String(temp));
+            request->send(200, "text/plain", String((int)round(temp)));
         } else {
             request->send(500, "text/plain", "Internal error");
         }
@@ -132,7 +134,7 @@ void setupWebserver() {
     server.on("/umidade", HTTP_GET, [](AsyncWebServerRequest *request) {
         float umidade = le_umidade();
         if(umidade != INFINITY) {
-            request->send(200, "text/plain", String(umidade));
+            request->send(200, "text/plain", String((int)round(umidade)));
         } else {
             request->send(500, "text/plain", "Internal error");
         }
