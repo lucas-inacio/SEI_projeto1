@@ -70,12 +70,3 @@ figure, span {
 section span {
     max-width: 50%;
 }
-
-#configButton {
-    position: fixed;
-    top: 50%;
-    right: 5%;
-    border-radius: 50%;
-    width: 150px;
-    height: 150px;
-}
