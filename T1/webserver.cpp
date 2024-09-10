@@ -129,14 +129,6 @@ void setupWebserver() {
         }
     });
 
-    server.on("/umidade", HTTP_GET, [](AsyncWebServerRequest *request) {
-        if(umidade != INFINITY) {
-            request->send(200, "text/plain", String((int)round(umidade)));
-        } else {
-            request->send(500, "text/plain", "Internal error");
-        }
-    });
-
     server.on("/led1", HTTP_POST, [](AsyncWebServerRequest *request) {
         request->send(200, "text/plain", "OK");
         digitalWrite(LED1, !digitalRead(LED1));
