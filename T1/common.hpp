@@ -1,12 +1,12 @@
 #ifndef COMMON_HPP
 #define COMMON_HPP
 
+#define LED1 19
+#define LED2 21
+
 // Indica se alterações devem ser aplicadas e o dispositivo reiniciado
+#ifndef IMPLEMENTATION
 extern bool aplicarConfig;
-extern unsigned long samplingPeriodMs; // 1 minuto
-extern unsigned short humidityMin;
-extern unsigned short humidityMax;
-extern unsigned short temperatureMin;
-extern unsigned short temperatureMax;
+#endif
 
 #endif // COMMON_HPP
