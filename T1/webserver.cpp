@@ -48,12 +48,17 @@ void sendGzipFile(AsyncWebServerRequest *request)
         if (query.indexOf(".css") >= 0) type = "text/css";
         else if (query.indexOf(".js") >= 0) type = "text/javascript";
         query += ".gz";
-        response = request->beginResponse(SPIFFS, query, type);
     } else {
-        response = request->beginResponse(SPIFFS, "/index.html.gz", type);
+        query = "/index.html.gz";
     }
-    response->addHeader("Content-Encoding", "gzip");
-    request->send(response);
+
+    if(SPIFFS.exists(query)) {
+        response = request->beginResponse(SPIFFS, query, type);
+        response->addHeader("Content-Encoding", "gzip");
+        request->send(response);
+    } else {
+        request->send(404, "text/plain", "Not found");
+    }
 }
 
 /*
