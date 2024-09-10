@@ -10,7 +10,7 @@ bool handleUpdate(AsyncWebServerRequest *request);
 
 void sendGzipFile(AsyncWebServerRequest *request);
 
-void sendGzipProgmem(AsyncWebServerRequest *request);
+// void sendGzipProgmem(AsyncWebServerRequest *request);
 
 void setupWebserver();
 

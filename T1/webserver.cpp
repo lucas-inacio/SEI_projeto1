@@ -6,7 +6,7 @@
 #include "config.hpp"
 #include "sensor.hpp"
 
-#include "site_data.h"
+// #include "site_data.h"
 
 #include <FS.h>
 #include <SPIFFS.h>
@@ -61,35 +61,35 @@ void sendGzipFile(AsyncWebServerRequest *request)
  * Agrega ao nome do arquivo a extensão .gz. A procura
  * é realizada em um std::map armazenada na memória de programa.
  */
-void sendGzipProgmem(AsyncWebServerRequest *request)
-{
-    String query = request->url();
-    String type{"text/html"};
-    if (query.indexOf('.') >= 0) {
-        if (query.indexOf(".css") >= 0) type = "text/css";
-        else if (query.indexOf(".js") >= 0) type = "text/javascript";
-    } else {
-        query = "/index.html";
-    }
+// void sendGzipProgmem(AsyncWebServerRequest *request)
+// {
+//     String query = request->url();
+//     String type{"text/html"};
+//     if (query.indexOf('.') >= 0) {
+//         if (query.indexOf(".css") >= 0) type = "text/css";
+//         else if (query.indexOf(".js") >= 0) type = "text/javascript";
+//     } else {
+//         query = "/index.html";
+//     }
 
-    size_t i = 0;
-    for (; i < gzipDataCount; ++i)
-    {
-        if (strcmp(query.c_str(), gzipDataMap[i].path) == 0)
-        {
-            AsyncWebServerResponse *response = request->beginResponse_P(
-                200, type, gzipDataMap[i].data, gzipDataMap[i].dataSize);
-            response->addHeader("Content-Encoding", "gzip");
-            request->send(response);
-            break;
-        }
-    }
+//     size_t i = 0;
+//     for (; i < gzipDataCount; ++i)
+//     {
+//         if (strcmp(query.c_str(), gzipDataMap[i].path) == 0)
+//         {
+//             AsyncWebServerResponse *response = request->beginResponse_P(
+//                 200, type, gzipDataMap[i].data, gzipDataMap[i].dataSize);
+//             response->addHeader("Content-Encoding", "gzip");
+//             request->send(response);
+//             break;
+//         }
+//     }
 
-    if (i == gzipDataCount)
-    {
-        request->send(404);
-    }
-}
+//     if (i == gzipDataCount)
+//     {
+//         request->send(404);
+//     }
+// }
 
 void setupWebserver() {
     server.on("/update", HTTP_POST, [](AsyncWebServerRequest *request) {
@@ -151,8 +151,8 @@ void setupWebserver() {
     server.onNotFound([](AsyncWebServerRequest *request) {
         Serial.println(request->url());
         
-        // sendGzipFile(request);
-        sendGzipProgmem(request);
+        sendGzipFile(request);
+        // sendGzipProgmem(request);
     });
     server.begin();
 }
