@@ -56,8 +56,12 @@
             async function getTemp() {
                 try {
                     let res = await fetch('/temp');
-                    let text = await res.text();
-                    temp.innerText = text + "°C";
+                    if(res.status === 200) {
+                        let text = await res.text();
+                        temp.innerText = text + "°C";
+                    } else {
+                        console.log(res.status);
+                    }
                     setTimeout(getTemp, 5000);
                 } catch(e) {
                     console.log(e.message);
@@ -67,11 +71,16 @@
             async function getHumi() {
                 try {
                     let res = await fetch('/umid');
-                    let text = await res.text();
-                    umid.innerText = text + "%";
+                    if(res.status === 200) {
+                        let text = await res.text();
+                        umid.innerText = text + "%";
+                    } else {
+                        console.log(res.status);
+                    }
                     setTimeout(getHumi, 5000);
                 } catch(e) {
                     console.log(e.message);
+                    console.log('Umidade');
                 }
             }
 
