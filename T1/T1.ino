@@ -10,6 +10,9 @@
 
 #define BOTAO 5
 
+#define IMPLEMENTATION
+#include "common.hpp"
+
 bool aplicarConfig = false;
 
 /***********************************************
@@ -62,6 +65,10 @@ void setup() {
         Serial.print("IP: ");
         Serial.println(WiFi.localIP());
     }
+
+    //  Configura LEDs
+    pinMode(LED1, OUTPUT);
+    pinMode(LED2, OUTPUT);
 
     configuraSensores();      
     setupWebserver();
