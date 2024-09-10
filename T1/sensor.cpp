@@ -14,6 +14,7 @@
 DHT_Unified dht(DHTPIN, DHTTYPE);
 
 void configuraSensores() {
+    dht.begin();
     // pinMode(PIN_A, OUTPUT);
     // pinMode(PIN_B, OUTPUT);
     // pinMode(PIN_C, OUTPUT);
