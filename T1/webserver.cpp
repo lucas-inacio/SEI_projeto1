@@ -115,7 +115,7 @@ void setupWebserver() {
 
     server.on("/umid", HTTP_GET, [](AsyncWebServerRequest *request) {
         if(umidade != INFINITY) {
-            request->send(200, "text/plain", String(umidade));
+            request->send(200, "text/plain", String((int)round(umidade)));
         } else {
             request->send(500, "text/plain", "Internal error");
         }
