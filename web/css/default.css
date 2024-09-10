@@ -50,12 +50,21 @@ header, footer {
 }
 
 button.led {
+    margin: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-grow: 1;
     border: none;
     background-color: white;
+}
+
+button.led:hover {
+    background-color: aquamarine;
+}
+
+button.led:active {
+    background-color: aqua;
 }
 
 figure, span {
