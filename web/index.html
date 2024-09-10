@@ -46,7 +46,8 @@
             // str deve ser led1 ou led2  
             async function mudaLED(str) {
                 try {
-                    await fetch('/'+str);
+                    await fetch(
+                        '/'+str, { method: 'POST', credentials: 'same-origin' });
                 } catch(e) {
                     console.log(e.message);
                 }
