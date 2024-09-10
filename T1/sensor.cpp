@@ -8,8 +8,8 @@
 #include <DHT_U.h>
 
 #define DHTPIN  18
-#define DHTTYPE DHT11
-// #define DHTTYPE DHT22
+// #define DHTTYPE DHT11
+#define DHTTYPE DHT22
 
 DHT_Unified dht(DHTPIN, DHTTYPE);
 

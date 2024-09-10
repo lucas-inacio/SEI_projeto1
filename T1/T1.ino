@@ -84,7 +84,7 @@ void loop() {
     }
 
     unsigned long agora = millis();
-    if(agora - tempo >= 1000) {
+    if(agora - tempo >= 2100) {
         tempo = agora;
         umidade = le_umidade();
         temperatura = le_temperatura();
